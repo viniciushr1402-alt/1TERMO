@@ -1,192 +1,133 @@
-# # 1. O laço "for" (Repetições Determinadas)
-# # Use o "for" quando você sabe exatamente quantas vezes algo deve acontecer(como ler 10 sensores ou processar uma lista de peças)
-# # Exemplo: relatorio de produção diaria
-# # imagine que você tem uma meta de produzir 5 lotes e quer numerar cada um:
-
-# # # Exemplo 1 
-# # # for lote in range(1, 6):
-# # #     print(f"Processando lote numero {lote}...")
-# # #     print("Qualidade verificada. [OK]")
-# # #     print("Produção do dia finalizada!")
-
-# # # for carros in range(10):
-# # #     print(f"Quantidade de carros {carros}")
-
-# # # #exemplo 2 
-# # # # contar ate 4 
-# # # for a in range(5):
-# # #     print(a)
-
-
-# # # # exemplo 3 
-# # # # pecas = ["Engrenagem", "Eixo", "Rolamento", "Parafuso"]
-# # # # maquinas = ["Maquina 1", "Maquina 2",]
-
-# # # # for item in pecas:
-# # # #     print(f"Item em estoque: {item}")
-# # # #     for maq in maquinas:
-# # # #         print(f"Maquinas que temos {maq}")
-
-# # # # Exercicio 1 
-# # # # 1. Contador de produção 
-# # # # uma esteira processa 10 peças por ciclo.Crie um programa que use um for para contar de 1 a 10 e, para cada numero, imprima: "Peça n X processada com sucesso". no final exiba "ciclo de produção concluido"
-
-
-# # # # for i in range(1, 11):
-# # # #     print("Peça nº", i, "processada com sucesso")
-# # # # print("Ciclo de produção concluído")
-
-# # # # imagine a produçãode frutas em uma feira. Desejo apresentar as frutas banana, manga, melancia, abacaxi com uma quantidade de 10 bananas , 5 mangas , 10 melancias e 13 abacaxi.
-
-
-# # # # frutas = ["Banana", "Manga", "Melancia", "Abacaxi"]
-# # # # quantidades = [10, 5, 10, 13]
-
-# # # # total = 0
-
-# # # # for i in range(len(frutas)):
-# # # #     print(frutas[i], "-", quantidades[i])
-# # # #     total += quantidades[i]
-
-# # # # print("Total de frutas:", total)
-
-# # # # # Montar a tabuada do 5 inicialmente pode ser usado por um valor fixo e depois usar a pergunta
-# # # numero=int(input("Você deseja qual numero da tabuada?"))
-
-# # # for i in range(1, 11):
-# # #    print(numero, "x" , i, "=", numero * i)
-
-# # # #    # USE O WHILE QUANDO VOCE NAO SABE QUANDO VAI PARAR. ELE DEPENDE DE UMA CONDIÇÃO (COMO UM SENSOR DE SEGURANÇA OU UM BOTÃO DE EMERGENCIA)
-# # #    # EXEMPLO: MONITOR DA TEMPERATURA (LOOP INFINITO CONTROLADO)
-
-# # # # temperatura = 25
-# # # # while temperatura < 40:
-# # # #        print(f"Temperatura atual: {temperatura}°C. Sistema operando...")  
-# # # #        temperatura += 3 #Simulando o aquecimento da maquina 
-# # # # print("ALERTA! Temperatura atingiu o limite. Desligado montor...")
-
-# # # # opcao = ""
-
-# # # # while opcao != "sair":
-# # # #     opcao = input("Digite a leitura do sensor ou 'sair' para fechar: ").lower()
-# # # #     if opcao != "sair":
-# # # #         print(f"Dado '{opcao}' registrado no banco de dados.")
-# # # # print("Sistema encerrado")
-
-# # # print("MENU DE SERIES")
-# # # print("Opção 1 - Stranger Things")
-# # # print("Opçao 2 - Dark")
-# # # print("Opção 3 - Bem-Vindos a Derry")
-# # # print("Opção 4 - Prison Break")
-
-# # # opcao= int(input("Escolha uma opção: "))
-
-
-# # # if opcao == 1:print("Você escolheu Stranger Things")
-# # # elif opcao == 3:print("Você escolheu Dark")
-# # # elif opcao == 3:print("Você escolheu Bem-Vindo a Derry")
-# # # elif opcao == 4:print("Você escolheu Prison Break")
-# # # else:print("Saindo do Menu")
-# # # leituras = [70,75,82,98,110,85,80]
-# # # for temp in leituras:
-# # #    if temp > 100:
-# # #       print(f"CRITICO: {temp}ºC detectado! Acionando parada de emergencia.")
-# # #       break #O loop para aqui não lê os proximos valores(85 e 80)
-# # # print(F"Temperatura esta em {temp}°C. Operação normal.")
-
-# # # print("Sistema desligado. Aguardando manurenção")
-
-# # # materias = ["metal", "metal", "plastico", "metal", "vidro", "metal"]
-
-# # # peca = ""
-
-# # # materiais = ["metal", "metal", "plastico", "metal", "vidro", "metal"]
-# # # for peca in materiais:
-# # #     if peca !="metal":
-# # #         print(F"Aviso: a peça de {peca} detectada. Desviando para descarte...")
-# # #         continue #Pula o restante do codigo abaixo e vai para a proxima peça
-    
-# # #     #Este codigo só roda se a peça for de metal
-# # #     print(F"Processando peça de {peca}. furando e polindo...")
-
-# # #     print("Fim do lote de produção")
-
-# #    # tente criar um codigo que conte de 1 a 10, mas use o continue para nao imprimir o numero 5 (simulando uma falha de sensor especifica no item 5).
-
-# # for i in range(1, 11):
-# #     if i == 5:
-# #         continue
-# #     print(i)
-    
-# #     from time import sleep 
-# #     for i in range (1,11)
-# #     if i == 5:
-# #         print(F"Falha ao ler o n° {i}")
-# #         sleep(1.8)
-# #         continue
-# #     print(i)
-# #     sleep(0.7)
-# #     print("Acabou")
-
-# #     # Simule um semafaro com parada para cada cor, Determine um tenpo que decaia para que quando mudar para tal cor ele represente uma pausa, com tempo e ainda com opçoes
-
-
-# import time
-
-# print(" SEMÁFORO ")
-
-# verde = 10
-# amarelo = 9
-# vermelho = 8
-
-# print("VERDE")
-# time.sleep(verde)
-# print("AMARELO")
-# time.sleep(amarelo)
-# print("VERMELHO")
-# time.sleep(vermelho)
-# print("Ciclo finalizado!")
-
-# exercicio 4 - Soma de cargas de energia(for)
-# Uma fabrica tem 5 maquinas. Peça ao usuario(vai input dentro do loop) o consumo em KWh de cada uma das maquinas. Ao final do loop, o programa deve exibir o consumo total da fabrica.
-
-# exercicio 5  identificador de peças defeituosas ( for + if
-# percorra uma lista de medidas de pecas:
-# medidas = [50.1, 49.8, 52.0, 50.0, 48.5]
-# o padrao de qualidade aceita apenas pecas com exatamente 50.0 ou mais.
-#Use um for para ler a lista e, para cada peça, diga se ela esta "Aprovada" ou "rejeitada"
-
-# total = 0
-# for i in range (1, 6):
-#     consumo = float(input(f"Digite o consumo da maquina {i} (kWh) :"))
-#     total += consumo
-
-#     print(f"O consumo total da fabrica: {total} (kwh) ")
-
-
-
-# print("Identifação de peças: ")
-# medidas =  [50.1, 49.8, 52.0, 50.0, 48.5]
-# # total = float(input("Digite o valor"))
-# for med in medidas:
-    
-#     if med > 50.0:
-#        print(f"{medidas} = Aprovada")
+# #1
+# print("Registro de Operador")
+# operador = input("Digite seu nome:")
+# turno = input("Digite seu turno:")
+# print(f"Operador {operador} registrando no Turno {turno}. Boa jornada!")
+#  #2
+# print("Cálculo de Produção")
+# producao_hora = int(input("Digite a quantidade de peças produzidas em 1 hora: "))
+# producao_turno = producao_hora * 8
+# print(f"Quantidade de peças produzidas em um turno de 8 horas:{producao_turno}")
+# #3
+# print("Conversador de Unidade")
+# Pressao_bar = float(input("Digite a pressão em Bar:"))
+# pressao_psi = Pressao_bar * 14.5
+# print(F"Pressão em PSI: {pressao_psi:.2f}")
+# print(F"Pressão em PSI: {pressao_psi}",round(pressao_psi, 2))
+# #4
+# print("Inspeção de peças")
+# nota1 = float(input("Digite a nota da inspeção 1 (0 a 10)"))
+# nota2 = float(input("Digite a nota da inspeção 2 (0 a 10)"))
+# nota3= float(input("Digite a nota da inspeção 3 (0 a 10)"))
+# media = (nota1 + nota2 + nota3) /3
+# print("Medida de qualidade da peça: ", round(media,2))
+# #5
+# print("Termostato Inteligente")
+# temperatura = float(input("Digite a temperatura do motor em °C:"))
+# if temperatura < 40:
+#     print("Baixa carga")
+# elif 40 <= temperatura <=70:
+#     print("Normal")
 # else:
-#     print(f"{medidas} = Reprovada")
+#     print("ALERTA: Resfriamento Ativado!")
+# #6
+# print('Bem vindo ao classificador de lotes')
+# codigo = input('Digite o codigo do produto \n')
+# if codigo == "A":
+#     print("Alimentos")
+# elif codigo == "E":
+#     print('Eletronicos')
+# else:
+#      print("Desconhecido")
+# #7
+# sensor_porta = input("Sensor da porta (aberta/fechada): ") 
 
-# exercicio: uma balança industrial esta pesando um lote 6, sacos de insumos. o peso ideal de cada saco e 50kg, mas o sistema aceita variaçoes.
+# botao_emergencia = input("Botão de emergência (ligado/desligado): ") 
+# if sensor_porta == "fechada" or botao_emergencia == "desligado": 
+#      print("Máquina pode iniciar") 
+# else: 
+#    print("Máquina não pode iniciar")  
+# #8
+# total = int(input("Total de peças: ")) 
+# defeituosas = int(input("Peças defeituosas: ")) 
+# percentual = (defeituosas / total) * 100 
+# if percentual > 5: 
+#  print("Revisar Processo") 
+# else:
+#  print("Pocesso otimizado")
+#  #9
+# medida = float(input("Digite a medida da peça: ")) 
+# if 9.8 <= medida <= 10.2: 
+#      print("Dentro da tolerância") 
+# elif medida < 9.8: 
+#     print("Abaixo da tolerância") 
+# else: 
+#    print("Acima da tolerância")
+# #10
+# for i in range(10, 0, -1): 
+#  print(i) 
+# print("Prensa Ativada!") 
+# #11
+# total = 0
+# while True: 
+#  peso = float(input("Digite o peso da caixa para sair: "))
+#  if peso == 0: 
+#    break
+# total += peso 
+# print(f"Total acumulado:", total) 
+# #12
+# maior = 0 
+# for i in range(5): 
+#  temp = float(input(f"Temperatura {i+1}: ")) 
+# if i == 0 or temp > maior: 
+#  maior = temp
+# print(f"Maior temperatura: {maior}") 
+# #13
 
-pesos = [50.2, 49.5, 51.0, 48.9, 50.0, 52.3]
-for peso in pesos:
-    if 48 <= peso <= 52:
-        print(peso, "- Dentro do padrão")
-    else:
-        print(peso, "- Fora do padrão")
+# senha_correta = "admin123" 
+# tentativas = 3 
+# while tentativas > 0: 
+#      senha = input("Digite a senha: ") 
+#      if senha == senha_correta: 
+#          print("Acesso Permitido") 
+#          break
+# else: 
+#          tentativas = 1 
+#          print("Acesso Negado")
+# if tentativas == 0: 
+#      print("Painel Bloqueado") 
 
-#criei um programa que recebe dois dados: a pressão atual (float) e as horas de uso acumuladas (int) de uma turbina.
-# O programa deve classificar o estado da maquina seguindo esta hierarquia: 
-# Critico (Prioridade 1) se a pressão for maior que 100 ou as horas de uso forem maiores que 10.000.
-# mensagem: "PARADA IMEDIATA: Risco de falha catastofrica.
-# Alerta (Prioridade 2): Se a pressão estiver entre 80 e 100 (inclusive)
+# estoque = 1000
+# print("\nmenu")
+# print("1. Adicionar itens")
+# print("2. Remover itens")
+# print("3. Sair")
+# escolha = input("Escolha uma opçao (1, 2, 3)")
 
+# if escolha == 1:
+#    quantidade = int(input("Digite a quantidade de itens a adicionar"))
+#    estoque += quantidade
+#    print(F"Estoque atualizado: {estoque} itens")
+# elif escolha == "2":
+#    quantidade = int(input("Digite a quantidade de itens a remover"))
+#    estoque -= quantidade
+#    print(F"Estoque atualiazado: {estoque} itens")
+#    if estoque < 10:
+#       print("Estoque Critico!")
+# elif escolha == "3":
+#    print("Saindo do simulador de estoque")
+#    break 
+# else:
+#  print("Opção invalida. Tente novamente") 
+
+#15
+print("Relatorio de Turno Completo")
+total_pecas = 5
+pecas_aprovadas = 0
+for i in range(1, total_pecas + 1):
+    diametro = float(input(f"Digite o diametro da peça {i} em mm"))
+    if 19.9 <= diametro <= 20.1:
+        pecas_aprovadas += 1
+        eficiencia = (pecas_aprovadas/ total_pecas)* 100
+        print(F"Total de peças aprovadas: {pecas_aprovadas}")
+        print(F"Eficiencia do lote: {eficiencia:.2f}%")

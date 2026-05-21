@@ -26,10 +26,10 @@
 # Return: Envia o resultado de volta para quem chamou a função
 
 
-def calcular_dobro(numero):
-    return numero * 2
-# Como usar: resultado = calcular_dobro(5)
-print(calcular_dobro(5))
+# def calcular_dobro(numero):
+#     return numero * 2
+# # Como usar: resultado = calcular_dobro(5)
+# print(calcular_dobro(5))
 
 # def verificar_reciclagem(ano_treinamento):
 #    ano_atual = 2026

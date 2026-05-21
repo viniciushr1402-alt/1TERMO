@@ -14,24 +14,17 @@ def cadastrar():
     texto += f"NR-10: {nr10}\n"
     texto += f"NR-35: {nr35}\n"
     texto += f"Brigada: {brigada}\n\n"
-
     texto += "EPIs OBRIGATÓRIOS\n"
-
     if setor.lower() == "elétrica":
         texto += "- Luvas de alta tensão\n"
         texto += "- Botas dielétricas\n"
-
     elif setor.lower() == "trabalho em altura":
         texto += "- Cinturão de segurança\n"
         texto += "- Talabarte\n"
-
     else:
-        texto += "Setor sem EPIs cadastrados.\n"
-
+        texto += "Setor sem EPIs cadastrados.\n" 
     texto += "\nRECICLAGEM\n"
-
     ano_atual = 2026
-
     if ano_atual - ano > 2:
         texto += "Treinamento vencido!"
     else:
@@ -39,12 +32,10 @@ def cadastrar():
 
     resultado.config(text=texto)
 
-
 janela = Tk()
 janela.title("Cadastro de Funcionário")
 janela.geometry("500x600")
 janela.config(bg="#d9d9d9")
-
 
 titulo = Label(
     janela,
@@ -53,7 +44,6 @@ titulo = Label(
     bg="#d9d9d9"
 )
 titulo.pack(pady=10)
-
 
 Label(janela, text="Nome", bg="#d9d9d9").pack()
 entrada_nome = Entry(janela, width=35)

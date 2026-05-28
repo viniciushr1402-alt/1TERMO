@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Vocacional SENAI | Descubra seu Futuro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    
+    <main class="container">
+        <section id="start-screen" class="card active">
+            <div class="logo-area">
+                <span class="senai-red">SENAI</span> <span class="white-text">VOCACIONAL</span>
+            </div>
+            <h1>Descubra sua verdadeira aptidão profissional</h1>
+            <p>Responda a 20 questões práticas e socioemocionais elaboradas para mapear suas habilidades e conectar seu perfil às grandes áreas tecnológicas da indústria.</p>
+            <button id="btn-start" class="btn-primary">Iniciar Teste Vocacional</button>
+        </section>
+
+        <section id="quiz-screen" class="card hidden">
+            <div class="quiz-header">
+                <div class="step-indicator">Etapa <span id="current-stage">1</span>/5</div>
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="question-number">Pergunta <span id="current-question-num">1</span> de 20</div>
+            </div>
+
+            <div id="question-container" class="fade-in">
+                <h2 id="question-text">Carregando pergunta...</h2>
+                <div id="alternatives-container" class="options-grid">
+                    </div>
+            </div>
+        </section>
+
+        <section id="result-screen" class="card hidden">
+            <div class="result-header">
+                <div class="badge animate-pulse">Resultado Concluído</div>
+                <h2>Você foi designado para:</h2>
+                <h1 id="result-title" class="senai-red-text">Área Industrial</h1>
+            </div>
+
+            <hr class="divider">
+
+            <div class="result-body">
+                <div id="character-box" class="character-container hidden">
+                    <div class="character-img-slot">
+                        <img id="char-img" src="" alt="Personagem do Curso">
+                    </div>
+                    <div class="character-info">
+                        <span class="char-badge">Mentor do Curso</span>
+                        <h3 id="char-name">Nome do Personagem</h3>
+                        <p id="char-advice">Conselho do mentor...</p>
+                    </div>
+                </div>
+
+                <div class="profile-desc-box">
+                    <h3>Seu Perfil Profissional</h3>
+                    <p id="result-description">Carregando análise de perfil...</p>
+                </div>
+
+                <div class="affinity-analysis-box">
+                    <h3>📊 Seu Gráfico de Afinidade Tecnológica</h3>
+                    <p>Veja o seu nível de compatibilidade com as 3 áreas que mais se destacaram nas suas respostas:</p>
+                    <div id="affinity-bars-container">
+                        </div>
+                </div>
+
+                <div class="vagas-status-box">
+                    <h3>📅 Próximas Turmas na Unidade</h3>
+                    <div class="vagas-info-grid">
+                        <div class="vaga-tag-card">
+                            <span class="vaga-label">Duração Média:</span>
+                            <span id="course-duration" class="vaga-value">-- meses</span>
+                        </div>
+                        <div class="vaga-tag-card">
+                            <span class="vaga-label">Turnos Disponíveis:</span>
+                            <span id="course-shifts" class="vaga-value">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>Principais Habilidades</h4>
+                        <ul id="list-skills"></ul>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Pontos Fortes</h4>
+                        <ul id="list-strengths"></ul>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Estilo Profissional</h4>
+                        <p id="text-style"></p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Possíveis Profissões</h4>
+                        <ul id="list-careers"></ul>
+                    </div>
+                </div>
+
+                <div class="qrcode-container">
+                    <div id="qrcode-box"></div>
+                    <div class="qrcode-text">
+                        <h4>Quer se inscrever nesse curso?</h4>
+                        <p>Aponte a câmera do seu celular para o QR Code ao lado para acessar o site oficial do SENAI e garantir sua vaga!</p>
+                    </div>
+                </div>
+
+                <div id="map-area" class="map-container hidden">
+                    <h3>📍 Localize seu Curso no Evento</h3>
+                    <p>Clique no botão abaixo para ver onde a sua área está localizada no mapa do nosso evento.</p>
+                    <button id="btn-show-map" class="btn-secondary">Visualizar Localização</button>
+                    <div id="map-display" class="map-image-wrapper hidden">
+                        </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="result-footer">
+                <blockquote id="motivational-message">O futuro da indústria começa com a sua escolha.</blockquote>
+                <button id="btn-restart" class="btn-secondary">Refazer Teste</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

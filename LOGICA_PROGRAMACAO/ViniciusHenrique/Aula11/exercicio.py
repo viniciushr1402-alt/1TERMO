@@ -1,4 +1,4 @@
-# Exercicio: crie uma aplicação que faça um calculo de idade de pessoas, deve perguntar o nome da pessoa e o ano de nascimento usando o tkinter e def quero o codigo sem datetime e usando massagebox
+# Exercicio: crie uma aplicação que faça um calculo de idade de pessoas, deve perguntar o nome da pessoa e o ano de nascimento 
 from tkinter import *
 from tkinter import messagebox
 

@@ -46,35 +46,36 @@
 # # 4 - Etapa Loop
 # janela.mainloop()
 
-from tkinter import *
-from tkinter import messagebox
+# from tkinter import *
+# from tkinter import messagebox
 
-def calcular_idade():
-    nome = entrada_nome.get()
-    ano_nascimento = int(entrada_ano.get())
+# def calcular_idade():
+#     nome = entrada_nome.get()
+#     ano_nascimento = int(entrada_ano.get())
 
-    ano_atual = 2026
-    idade = ano_atual - ano_nascimento
+#     ano_atual = 2026
+#     idade = ano_atual - ano_nascimento
 
-    messagebox.showinfo(
-        "Resultado",
-        f"Olá, {nome}! Sua idade é {idade} anos."
-    )
+#     messagebox.showinfo(
+#         "Resultado",
+#         f"Olá, {nome}! Sua idade é {idade} anos."
+#     )
 
-janela = Tk()
-janela.title("Cálculo de Idade")
-janela.geometry("300x150")
+# janela = Tk()
+# janela.title("Cálculo de Idade")
+# janela.geometry("300x150")
 
-Label(janela, text="Nome:").grid(row=0, column=0, padx=5, pady=5)
-entrada_nome = Entry(janela)
-entrada_nome.grid(row=0, column=1)
+# Label(janela, text="Nome:").grid(row=0, column=0, padx=5, pady=5)
+# entrada_nome = Entry(janela)
+# entrada_nome.grid(row=0, column=1)
 
-Label(janela, text="Ano de nascimento:").grid(row=1, column=0, padx=5, pady=5)
-entrada_ano = Entry(janela)
-entrada_ano.grid(row=1, column=1)
+# Label(janela, text="Ano de nascimento:").grid(row=1, column=0, padx=5, pady=5)
+# entrada_ano = Entry(janela)
+# entrada_ano.grid(row=1, column=1)
 
-Button(janela, text="Calcular Idade", command=calcular_idade).grid(
-    row=2, column=0, columnspan=2, pady=10
-)
+# Button(janela, text="Calcular Idade", command=calcular_idade).grid(
+#     row=2, column=0, columnspan=2, pady=10
+# )
 
-janela.mainloop()
+# janela.mainloop()
+

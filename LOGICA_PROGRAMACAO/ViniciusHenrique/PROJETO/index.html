@@ -3,132 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Vocacional SENAI | Descubra seu Futuro</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>Diagnóstico Vocacional Avançado | SENAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="tech-bg"></div>
-    
-    <main class="container">
-        <section id="start-screen" class="card active">
-            <div class="logo-area">
-                <span class="senai-red">SENAI</span> <span class="white-text">VOCACIONAL</span>
-            </div>
-            <h1>Descubra sua verdadeira aptidão profissional</h1>
-            <p>Responda a 20 questões práticas e socioemocionais elaboradas para mapear suas habilidades e conectar seu perfil às grandes áreas tecnológicas da indústria.</p>
-            <button id="btn-start" class="btn-primary">Iniciar Teste Vocacional</button>
-        </section>
 
-        <section id="quiz-screen" class="card hidden">
-            <div class="quiz-header">
-                <div class="step-indicator">Etapa <span id="current-stage">1</span>/5</div>
-                <div class="progress-container">
-                    <div id="progress-bar" class="progress-bar"></div>
+    <div class="tech-grid"></div>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div>
+                <div class="brand-container">
+                    <div class="brand-logo">SENAI</div>
+                    <div class="brand-subtext">Aprendizagem</div>
                 </div>
-                <div class="question-number">Pergunta <span id="current-question-num">1</span> de 20</div>
+                <ul class="nav-menu">
+                    <li class="nav-item active" id="nav-inicio" onclick="alternarTela('inicio')"><i class="fa-solid fa-house"></i> Início</li>
+                    <li class="nav-item" id="nav-cursos" onclick="alternarTela('cursos')"><i class="fa-solid fa-graduation-cap"></i> Sobre os cursos</li>
+                    <li class="nav-item" id="nav-aprendizado" onclick="alternarTela('aprendizado')"><i class="fa-solid fa-book-open"></i> O que vou aprender</li>
+                    <li class="nav-item" id="nav-perguntas" onclick="alternarTela('perguntas')"><i class="fa-solid fa-circle-question"></i> Perguntas Frequentes</li>
+                    <li class="nav-item" id="nav-depoimentos" onclick="alternarTela('depoimentos')"><i class="fa-solid fa-comment-dots"></i> Depoimentos</li>
+                    <li class="nav-item" id="nav-carreiras" onclick="alternarTela('carreiras')"><i class="fa-solid fa-briefcase"></i> Carreiras</li>
+                </ul>
             </div>
+            <div class="motivation-card">
+                <i class="fa-solid fa-quote-left"></i>
+                <p class="motivation-text">O conhecimento transforma ideias em realidade.</p>
+                <span class="motivation-brand">SENAI</span>
+            </div>
+        </aside>
 
-            <div id="question-container" class="fade-in">
-                <h2 id="question-text">Carregando pergunta...</h2>
-                <div id="alternatives-container" class="options-grid">
+        <main class="main-content">
+            
+            <div id="section-inicio" class="content-section">
+                <div class="quiz-card led-panel" id="quiz-screen">
+                    <div class="stage-badge" id="current-stage">ETAPA 1/15</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-indicator"></div>
                     </div>
-            </div>
-        </section>
+                    <div class="question-number" id="q-counter">Questão 1 de 15</div>
+                    <div class="question-text" id="q-text">Carregando avaliação de competências de engenharia...</div>
+                    
+                    <div class="options-list" id="options-box"></div>
 
-        <section id="result-screen" class="card hidden">
-            <div class="result-header">
-                <div class="badge animate-pulse">Resultado Concluído</div>
-                <h2>Você foi designado para:</h2>
-                <h1 id="result-title" class="senai-red-text">Área Industrial</h1>
-            </div>
-
-            <hr class="divider">
-
-            <div class="result-body">
-                <div id="character-box" class="character-container hidden">
-                    <div class="character-img-slot">
-                        <img id="char-img" src="" alt="Personagem do Curso">
-                    </div>
-                    <div class="character-info">
-                        <span class="char-badge">Mentor do Curso</span>
-                        <h3 id="char-name">Nome do Personagem</h3>
-                        <p id="char-advice">Conselho do mentor...</p>
+                    <div class="action-container">
+                        <button class="btn-cyber btn-back" id="btn-prev-question" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                        <button class="btn-cyber btn-next" id="btn-next-question">Próxima <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
 
-                <div class="profile-desc-box">
-                    <h3>Seu Perfil Profissional</h3>
-                    <p id="result-description">Carregando análise de perfil...</p>
-                </div>
+                <div class="result-screen hidden" id="result-screen">
+                    <div class="result-header">
+                        <div class="stage-badge">Diagnóstico Vocacional Concluído</div>
+                        <h2 class="result-title" id="res-curso-nome">Carregando Perfil...</h2>
+                        <div class="match-badge" id="res-match">Compatibilidade de Afinidade: 98%</div>
+                    </div>
 
-                <div class="affinity-analysis-box">
-                    <h3>📊 Seu Gráfico de Afinidade Tecnológica</h3>
-                    <p>Veja o seu nível de compatibilidade com as 3 áreas que mais se destacaram nas suas respostas:</p>
-                    <div id="affinity-bars-container">
+                    <div class="result-grid">
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-user-gear"></i> Perfil Comportamental Detalhado</h3>
+                            <p id="res-perfil-desc">...</p>
                         </div>
-                </div>
 
-                <div class="vagas-status-box">
-                    <h3>📅 Próximas Turmas na Unidade</h3>
-                    <div class="vagas-info-grid">
-                        <div class="vaga-tag-card">
-                            <span class="vaga-label">Duração Média:</span>
-                            <span id="course-duration" class="vaga-value">-- meses</span>
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-bolt"></i> Habilidades Técnicas Principais (Hard Skills)</h3>
+                            <div class="tag-list" id="res-habilidades"></div>
                         </div>
-                        <div class="vaga-tag-card">
-                            <span class="vaga-label">Turnos Disponíveis:</span>
-                            <span id="course-shifts" class="vaga-value">--</span>
+
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-book-open"></i> Matriz de Disciplinas e Aprendizado</h3>
+                            <div class="tag-list" id="res-grade"></div>
+                        </div>
+
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-microchip"></i> Tecnologias & Ferramentas de Trabalho</h3>
+                            <div class="tag-list" id="res-techs"></div>
+                        </div>
+
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-network-wired"></i> Áreas de Atuação e Inserção Industrial</h3>
+                            <div class="tag-list" id="res-atuacao"></div>
+                        </div>
+
+                        <div class="result-box glow-border-box">
+                            <h3><i class="fa-solid fa-sack-dollar"></i> Média Salarial Projetada no Mercado</h3>
+                            <p id="res-salario" style="font-size: 1.6rem; font-weight: bold; color: #fff; margin-top: 5px; text-shadow: 0 0 8px var(--neon-red);"></p>
+                        </div>
+
+                        <div class="result-box glow-border-box" style="grid-column: 1 / -1;">
+                            <h3><i class="fa-solid fa-lightbulb"></i> Diretriz do Futuro Industrial</h3>
+                            <p id="res-motivado" style="font-style: italic; color: #fff; line-height: 1.6; font-size: 1.1rem;"></p>
+                        </div>
+
+                        <div class="reset-btn-wrapper">
+                            <button class="btn-cyber btn-next" style="margin: 30px auto 0;" onclick="window.location.reload()"><i class="fa-solid fa-rotate-right"></i> Reiniciar Diagnóstico Técnico</button>
                         </div>
                     </div>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h4>Principais Habilidades</h4>
-                        <ul id="list-skills"></ul>
-                    </div>
-                    <div class="metric-card">
-                        <h4>Pontos Fortes</h4>
-                        <ul id="list-strengths"></ul>
-                    </div>
-                    <div class="metric-card">
-                        <h4>Estilo Profissional</h4>
-                        <p id="text-style"></p>
-                    </div>
-                    <div class="metric-card">
-                        <h4>Possíveis Profissões</h4>
-                        <ul id="list-careers"></ul>
-                    </div>
-                </div>
-
-                <div class="qrcode-container">
-                    <div id="qrcode-box"></div>
-                    <div class="qrcode-text">
-                        <h4>Quer se inscrever nesse curso?</h4>
-                        <p>Aponte a câmera do seu celular para o QR Code ao lado para acessar o site oficial do SENAI e garantir sua vaga!</p>
-                    </div>
-                </div>
-
-                <div id="map-area" class="map-container hidden">
-                    <h3>📍 Localize seu Curso no Evento</h3>
-                    <p>Clique no botão abaixo para ver onde a sua área está localizada no mapa do nosso evento.</p>
-                    <button id="btn-show-map" class="btn-secondary">Visualizar Localização</button>
-                    <div id="map-display" class="map-image-wrapper hidden">
-                        </div>
                 </div>
             </div>
 
-            <hr class="divider">
-
-            <div class="result-footer">
-                <blockquote id="motivational-message">O futuro da indústria começa com a sua escolha.</blockquote>
-                <button id="btn-restart" class="btn-secondary">Refazer Teste</button>
+            <div id="section-cursos" class="content-section hidden">
+                <div class="quiz-card led-panel">
+                    <h2 class="section-title-big"><i class="fa-solid fa-graduation-cap"></i> Portfólio Geral de Qualificação Profissional</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 1.05rem;">
+                        Explore as especificações completas de cada vertente técnica ativa em nossa unidade acadêmica:
+                    </p>
+                    <div id="lista-geral-cursos" class="detailed-vertical-list"></div>
+                </div>
             </div>
-        </section>
-    </main>
 
-    <script src="script.js"></script>
+            <div id="section-aprendizado" class="content-section hidden">
+                <div class="quiz-card led-panel">
+                    <h2 class="section-title-big"><i class="fa-solid fa-book-open"></i> Infraestrutura e Metodologia SENAI</h2>
+                    <div class="text-block-info">
+                        <h4>Saga SENAI de Inovação</h4>
+                        <p>O aprendizado no SENAI rompe barreiras convencionais. Nossos alunos resolvem problemas e desafios industriais complexos e verídicos enviados diretamente por corporações parceiras da região, construindo protótipos funcionais desde as primeiras semanas de curso.</p>
+                        
+                        <h4>Aulas Práticas Avançadas</h4>
+                        <p>Mais de 75% da carga horária de todas as disciplinas ocorre dentro de laboratórios industriais de ponta. Os alunos ganham proficiência prática operando maquinários e ferramentas com o mesmo padrão tecnológico exigido pelas principais multinacionais globais.</p>
+                        
+                        <h4>Desenvolvimento Socioemocional (Soft Skills)</h4>
+                        <p>Além do domínio de ferramentas tecnológicas, a metodologia estimula o desenvolvimento de liderança de equipes, pensamento analítico crítico, resiliência na resolução de problemas complexos e comunicação assertiva.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-perguntas" class="content-section hidden">
+                <div class="quiz-card led-panel">
+                    <h2 class="section-title-big"><i class="fa-solid fa-circle-question"></i> Central de Dúvidas Técnicas</h2>
+                    <div class="faq-container" id="faq-dinamico-container"></div>
+                </div>
+            </div>
+
+            <div id="section-depoimentos" class="content-section hidden">
+                <div class="quiz-card led-panel">
+                    <h2 class="section-title-big"><i class="fa-solid fa-comment-dots"></i> Relatórios de Sucesso e Egressos</h2>
+                    <div class="detailed-vertical-list">
+                        <div class="result-box glow-border-box">
+                            <p style="font-size: 1.1rem; line-height: 1.6;">"A imersão prática em ferramentas CAD/CAM e a programação de centros de usinagem CNC me deram uma segurança absurda. Fui contratado por uma multinacional automotiva antes mesmo de terminar meu curso técnico."</p>
+                            <span style="color: var(--neon-red); font-family: var(--font-cyber); font-weight: bold; display: block; margin-top: 15px;">— Gustavo N., Programador e Operador CNC Sênior</span>
+                        </div>
+                        <div class="result-box glow-border-box">
+                            <p style="font-size: 1.1rem; line-height: 1.6;">"A base pesada de lógica de programação, arquitetura de redes de computadores e tratamento de bancos de dados relacionais que construí nos laboratórios do SENAI acelerou exponencialmente minha carreira corporativa."</p>
+                            <span style="color: var(--neon-red); font-family: var(--font-cyber); font-weight: bold; display: block; margin-top: 15px;">— Aline M., Engenheira de Software Cloud / Devops</span>
+                        </div>
+                        <div class="result-box glow-border-box">
+                            <p style="font-size: 1.1rem; line-height: 1.6;">"Entender a fundo o funcionamento prático de controladores lógicos, painéis elétricos industriais e esquemas de injeção eletrônica avançada me permitiu abrir minha própria empresa especializada em diagnósticos complexos."</p>
+                            <span style="color: var(--neon-red); font-family: var(--font-cyber); font-weight: bold; display: block; margin-top: 15px;">— Ricardo K., Diretor de Engenharia de Diagnósticos Automotivos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-carreiras" class="content-section hidden">
+                <div class="quiz-card led-panel">
+                    <h2 class="section-title-big"><i class="fa-solid fa-briefcase"></i> Conexão e Inserção no Mercado Corporativo</h2>
+                    <div class="text-block-info">
+                        <h4>Métricas Nacionais de Empregabilidade</h4>
+                        <p>Pesquisas institucionais contínuas comprovam que mais de 80% dos alunos formados em cursos de Aprendizagem e Qualificação Técnica do SENAI conquistam contratações em cargos efetivos no mercado nos primeiros 12 meses após a conclusão do curso.</p>
+                        
+                        <h4>Plataforma Exclusiva 'Contrate-me'</h4>
+                        <p>Nossos estudantes contam com acesso integral a uma plataforma inteligente de vagas corporativas alimentada por inteligência artificial, que cruza o perfil de competências do aluno diretamente com os requisitos técnicos de processos seletivos abertos de centenas de indústrias associadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="learning-card">
+                <div>
+                    <h2 class="section-title">O que você vai aprender?</h2>
+                    <ul class="learning-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Técnicas e conhecimentos atualizados com foco no mercado.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Aulas práticas em laboratórios modernos e equipados.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Projetos reais para desenvolver habilidades técnicas.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <aside class="right-sidebar">
+            <h2 class="section-title">Cursos do SENAI</h2>
+            <div id="courses-container" class="courses-scroll-box"></div>
+        </aside>
+
+        <footer class="bottom-footer">
+            <div class="stat-card"><i class="fa-solid fa-users"></i><div><div class="stat-num">+70 anos</div><div class="stat-label">transformando vidas</div></div></div>
+            <div class="stat-card"><i class="fa-solid fa-layer-group"></i><div><div class="stat-num">Cursos atualizados</div><div class="stat-label">com foco no mercado</div></div></div>
+            <div class="stat-card"><i class="fa-solid fa-flask"></i><div><div class="stat-num">Aprendizado prático</div><div class="stat-label">em laboratórios modernos</div></div></div>
+            <div class="stat-card"><i class="fa-solid fa-rocket"></i><div><div class="stat-num">Futuro e inovação</div><div class="stat-label">para sua carreira</div></div></div>
+        </footer>
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>

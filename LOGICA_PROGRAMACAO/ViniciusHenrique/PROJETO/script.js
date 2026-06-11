@@ -1,517 +1,458 @@
-const questions = [
+// BANCO DE DADOS INTEGRAL DE CURSOS (6 OPÇÕES INSTITUCIONAIS COMPLETAS)
+const listaCursos = {
+    ti: {
+        nome: "Tecnologia da Informação",
+        icone: "fa-code",
+        descricao: "Desenvolvimento de sistemas integrados, gerenciamento de infraestrutura cloud, segurança cibernética corporativa e arquitetura de banco de dados orientada a processos industriais.",
+        habilidades: ["Lógica de Programação Avançada", "Estrutura de Redes Computacionais", "Segurança da Informação", "Desenvolvimento Web & Mobile"],
+        grade: ["Algoritmos e Estruturas", "Arquitetura Cloud", "Banco de Dados SQL/NoSQL", "DevOps e Integração Contínua"],
+        techs: ["VS Code", "Python / JavaScript", "Docker & Kubernetes", "Git / GitHub"],
+        atuacao: ["Fábricas Inteligentes (I4.0)", "Empresas de Software", "Bancos", "Consultorias de Segurança"],
+        salario: "R$ 3.800,00 a R$ 9.500,00",
+        diretriz: "O código robusto governa as engrenagens digitais e os fluxos de dados do ecossistema corporativo.",
+        cargaHoraria: "1200h"
+    },
+    mecanica: {
+        nome: "Fabricação Mecânica",
+        icone: "fa-gears",
+        descricao: "Processos complexos e integrados de usinagem física industrial, conformação de materiais de alta resistência, modelagem de alta precisão em softwares CAD/CAM e programação de comandos CNC.",
+        habilidades: ["Leitura e Interpretação de Desenho Técnico", "Cálculo Técnico de Precisão", "Programação de Torno CNC", "Metrologia Industrial"],
+        grade: ["Desenho Técnico Mecânico", "Tecnologia dos Materiais", "Usinagem de Elementos", "Sistemas Hidráulicos e Pneumáticos"],
+        techs: ["SolidWorks", "AutoCAD", "Comandos CNC Siemens / Fanuc", "Paquímetros / Micrômetros"],
+        atuacao: ["Indústrias Metalmecânicas", "Fábricas de Autopeças", "Setor Aeroespacial", "Montadoras Automotivas"],
+        salario: "R$ 3.200,00 a R$ 7.800,00",
+        diretriz: "A precisão matemática milimétrica esculpe o metal estrutural que dá suporte à infraestrutura do futuro.",
+        cargaHoraria: "1200h"
+    },
+    automotiva: {
+        nome: "Manutenção Automotiva",
+        icone: "fa-car",
+        descricao: "Diagnósticos eletroeletrônicos automotivos complexos, manutenção preventiva e corretiva de sistemas veiculares mecânicos estruturais e atuação especializada em sistemas de injeção eletrônica e redes embarcadas.",
+        habilidades: ["Diagnóstico Computadorizado Veicular", "Análise de Circuitos Elétricos", "Reparação de Motores Térmicos", "Sistemas de Transmissão Automatizada"],
+        grade: ["Eletricidade Automotiva", "Sistemas de Injeção Eletrônica", "Mecânica de Chassis", "Gerenciamento Térmico Veicular"],
+        techs: ["Scanners Automotivos Bosch", "Osciloscópios Técnicos", "Elevadores Hidráulicos", "Gases de Exaustão"],
+        atuacao: ["Concessionárias Corporativas", "Centros Automotivos", "Empresas de Transporte Logístico", "Frotas Industriais"],
+        salario: "R$ 2.900,00 a R$ 6.800,00",
+        diretriz: "A mecânica fina aliada à eletroeletrônica mantém a mobilidade comercial ativa e segura.",
+        cargaHoraria: "1000h"
+    },
+    gestao: {
+        nome: "Administração e Gestão",
+        icone: "fa-chart-pie",
+        descricao: "Planejamento estratégico corporativo, gerenciamento contábil e de custos industriais, controle estatístico de fluxos organizacionais, gestão de suprimentos e liderança estratégica de cadeias produtivas.",
+        habilidades: ["Gestão de Fluxos de Caixa", "Planejamento de Produção (PCP)", "Liderança de Equipes Multidisciplinares", "Análise Estatística de Processos"],
+        grade: ["Contabilidade Geral e Industrial", "Logística de Suprimentos", "Gestão da Qualidade Total", "Comportamento Organizacional"],
+        techs: ["Sistemas ERP (SAP / Totvs)", "Microsoft Excel Avançado", "Power BI dashboards", "Trello / Jira"],
+        atuacao: ["Escritórios de Planejamento", "Setores de Suprimentos Industriais", "Recursos Humanos", "Controle de Qualidade"],
+        salario: "R$ 2.700,00 a R$ 6.500,00",
+        diretriz: "A gestão lógica e a tomada de decisões corporativas estruturadas guiam a eficiência e lucratividade da operação.",
+        cargaHoraria: "800h"
+    },
+    eletrica: {
+        nome: "Eletrotécnica Industrial",
+        icone: "fa-bolt",
+        descricao: "Planejamento, instalação e manutenção de sistemas elétricos prediais e industriais de alta e baixa tensão, seguindo rigorosas normas técnicas e de segurança operacional.",
+        habilidades: ["Interpretação de Diagramas Elétricos", "Montagem de Painéis de Comando", "Manutenção de Motores Elétricos", "Análise de Redes de Alta Tensão"],
+        grade: ["Circuitos Elétricos CA/CC", "Instalações Elétricas Industriais", "Máquinas Elétricas Rotativas", "Automação com CLPs"],
+        techs: ["Multímetros / Alicates Amperímetros", "Softwares CAD Elétrico", "Controladores Lógicos Programáveis", "Disjuntores Caixa Moldada"],
+        atuacao: ["Subestações Elétricas", "Fábricas de Grande Porte", "Empresas de Geração/Distribuição", "Manutenção Industrial"],
+        salario: "R$ 3.400,00 a R$ 8.200,00",
+        diretriz: "A energia elétrica controlada com segurança alimenta o progresso contínuo e a automação global.",
+        cargaHoraria: "1200h"
+    },
+    quimica: {
+        nome: "Química Industrial",
+        icone: "fa-flask-vial",
+        descricao: "Operação, monitoramento e controle físico-químico de processos industriais laboratoriais, análise qualitativa de matérias-primas e desenvolvimento controlado de formulações químicas.",
+        habilidades: ["Análise Laboratorial Quantitativa", "Controle de Reações Químicas", "Operação de Instrumentação Analítica", "Tratamento de Efluentes Industriais"],
+        grade: ["Química Analítica e Inorgânica", "Operações Unitárias Industriais", "Controle de Processos Químicos", "Segurança Química e Microbiologia"],
+        techs: ["Espectrofotômetros", "Medidores de pH Digitais", "Balanças Analíticas de Alta Precisão", "Vidraria Laboratorial Avançada"],
+        atuacao: ["Indústrias Petroquímicas", "Fábricas de Alimentos e Bebidas", "Estações de Tratamento de Água", "Laboratórios de Controle de Qualidade"],
+        salario: "R$ 3.100,00 a R$ 7.400,00",
+        diretriz: "A transformação molecular consciente converte elementos em insumos indispensáveis para a sociedade moderna.",
+        cargaHoraria: "1000h"
+    }
+};
+
+// BANCO DE DADOS DE PERGUNTAS (15 QUESTÕES DE ALTA RESOLUÇÃO)
+const perguntasQuiz = [
     {
-        id: 1,
-        text: "Em um projeto de equipe, qual função você costuma assume naturally?",
-        alternatives: [
-            { text: "Organizar o cronograma, delegar tarefas e liderar o time.", weights: { "Administração e Gestão": 4, "Logística e Transporte": 3 } },
-            { text: "Propor ideias fora da caixa e soluções de design inovadoras.", weights: { "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4, "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4 } },
-            { text: "Mergulhar na lógica do problem e focar no código ou sistema técnico.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 3 } },
-            { text: "Analisar os riscos, revisar detalhes e garantir que tudo saia correto.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4, "Química, Cerâmica e Plásticos": 3 } }
+        pergunta: "Em um projeto prático de equipe, qual função você assume de maneira totalmente instintiva e de foco pessoal?",
+        opcoes: [
+            { texto: "Coordenar o cronograma geral, delegar tarefas estruturais e liderar as frentes.", curso: "gestao" },
+            { texto: "Estruturar a lógica interna, programar os códigos core e mitigar bugs técnicos.", curso: "ti" },
+            { texto: "Projetar os componentes físicos, gerar desenhos de corte e simular mecânica.", curso: "mecanica" },
+            { texto: "Analisar a alimentação de energia, balanceamento de cargas e malha de força.", curso: "eletrica" }
         ]
     },
     {
-        id: 2,
-        text: "Quando um equipamento ou aplicativo para de funcionar, qual é sua reação imediata?",
-        alternatives: [
-            { text: "Abro o manual ou pesquiso na internet para entender a lógica interna do erro.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4 } },
-            { text: "Começo a desmontar ou mexer fisicamente para achar a falha mecânica.", weights: { "Automotiva": 4, "Fabricação Mecânica e Mecânica Industrial": 4, "Refrigeração e Climatização": 3 } },
-            { text: "Ligo para o suporte ou gerencio a situação acionando os responsáveis de forma organizada.", weights: { "Administração e Gestão": 4, "Logística e Transporte": 2 } },
-            { text: "Avalio se a falha traz riscos imediatos de segurança para o ambiente.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4 } }
+        pergunta: "Se um maquinário industrial complexo interromper a operação repentinamente, o que primeiro atrai sua análise?",
+        opcoes: [
+            { texto: "Investigar surtos elétricos, parametrização de inversores ou atuação de fusíveis.", curso: "eletrica" },
+            { texto: "Avaliar o desgaste mecânico físico, desalinhamento estrutural ou folgas de eixos.", curso: "mecanica" },
+            { texto: "Analisar logs de execução, estouro de memória no firmware ou bugs lógicos.", curso: "ti" },
+            { texto: "Mapear o custo ocioso da parada na cadeia logística e remanejar o fluxo de horas.", curso: "gestao" }
         ]
     },
     {
-        id: 3,
-        text: "Qual desses atividades mais desperta o seu interesse no dia a dia?",
-        alternatives: [
-            { text: "Descobrir o funcionamento de motores, veículos ou sistemas de propulsão.", weights: { "Automotiva": 4, "Fabricação Mecânica e Mecânica Industrial": 3 } },
-            { text: "Desenhar layouts, criar peças visuais, embalagens ou combinar estilos.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4, "Construção Civil e Design de Mobiliário": 3 } },
-            { text: "Entender composições químicas, transformações de materiais ou preparo de alimentos.", weights: { "Química, Cerâmica e Plásticos": 4, "Alimentos e Bebidas": 4 } },
-            { text: "Planejar rotas eficientes, organizar estoques ou controlar finanças.", weights: { "Logística e Transporte": 4, "Administração e Gestão": 3 } }
+        pergunta: "Qual ecossistema operacional mais se alinha com seus planos de evolução profissional de longo prazo?",
+        opcoes: [
+            { texto: "Laboratórios limpos de software, arquiteturas em nuvem ou infraestrutura de rede.", curso: "ti" },
+            { texto: "Linhas de fabricação pesada, operação de eixos CNC e usinagem dimensional.", curso: "mecanica" },
+            { texto: "Planta laboratorial físico-química, titulações complexas e controle molecular.", curso: "quimica" },
+            { texto: "Oficinas de alta performance, varredura com scanners automotivos e análise de motores.", curso: "automotiva" }
         ]
     },
     {
-        id: 4,
-        text: "Imagine que você precisa resolver um problema crítico sob forte pressão de tempo. O que faz?",
-        alternatives: [
-            { text: "Mantenho a calma, sigo os protocolos de segurança e analiso os dados disponíveis.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4, "Química, Cerâmica e Plásticos": 3 } },
-            { text: "Busco uma adaptação rápida e inovadora usando as ferramentas manuais ou técnicas que tenho.", weights: { "Metalurgia e Soldagem": 4, "Refrigeração e Climatização": 4, "Construção Civil e Design de Mobiliário": 3 } },
-            { text: "Conecto sistemas, mudo parâmetros lógicos ou reinicio processos de forma analítica.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4 } },
-            { text: "Reúno as pessoas envolvidas, distribuo funções emergenciais e piloto a solução.", weights: { "Administração e Gestão": 4, "Logística e Transporte": 3 } }
+        pergunta: "Ao liderar ou executar uma rotina fabril, qual métrica determina o sucesso da sua entrega?",
+        opcoes: [
+            { texto: "A conformidade geométrica milimétrica rigorosa e acabamento de precisão.", curso: "mecanica" },
+            { texto: "A imunidade a ruídos elétricos externos e eficiência na atenuação de harmônicas.", curso: "eletrica" },
+            { texto: "A minimização do lead time, otimização de custos operacionais e margem líquida.", curso: "gestao" },
+            { texto: "A estabilidade estequiométrica das reações e pureza absoluta do material final.", curso: "quimica" }
         ]
     },
     {
-        id: 5,
-        text: "Se você pudesse escolher passar o dia em um desses ambientes de aprendizado, qual seria?",
-        alternatives: [
-            { text: "Um laboratório de testes cibernéticos, desenvolvimento de softwares ou servidores digitais.", weights: { "Tecnologia da Informação e Informática": 4 } },
-            { text: "Uma oficina moderna de robótica, circuitos integrados e braços automatizados.", weights: { "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Fabricação Mecânica e Mecânica Industrial": 3 } },
-            { text: "Um estúdio criativo focado em prototipagem de móveis, arquitetura ou tendências de moda.", weights: { "Construção Civil e Design de Mobiliário": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4 } },
-            { text: "Uma planta industrial de alta tecnologia monitorando processos químicos ou de alimentos.", weights: { "Química, Cerâmica e Plásticos": 4, "Alimentos e Bebidas": 4 } }
+        pergunta: "Qual das seguintes rotinas de engenharia gera em você maior nível de engajamento e foco?",
+        opcoes: [
+            { texto: "Escrever rotinas lógicas abstratas e automatizar pipelines repetitivos em código.", curso: "ti" },
+            { texto: "Interpretar esquemas elétricos complexos e reparar redes elétricas embarcadas.", curso: "automotiva" },
+            { texto: "Calcular dosagens de insumos, pH e conduzir ensaios de fracionamento térmico.", curso: "quimica" },
+            { texto: "Analisar balanços gerenciais, gerir compras estruturadas e implementar melhorias Lean.", curso: "gestao" }
         ]
     },
     {
-        id: 6,
-        text: "Como você lida com regras rígidas de processos e normas técnicas?",
-        alternatives: [
-            { text: "Gosto de segui-las rigorosamente porque eliminam erros e protegem a saúde de todos.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4, "Alimentos e Bebidas": 3 } },
-            { text: "Entendo a importância, mas procuro brechas para otimizar o tempo e inovar no método.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 3, "Administração e Gestão": 3 } },
-            { text: "Considero fundamentais para que as máquinas, encaixes e medidas saiam perfeitamente exatos.", weights: { "Fabricação Mecânica e Mecânica Industrial": 4, "Metalurgia e Soldagem": 4, "Construção Civil e Design de Mobiliário": 3 } },
-            { text: "As encaro como algoritmos: parâmetros fixos onde uso minha lógica para trabalhar dentro delas.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 3 } }
+        pergunta: "Ao inspecionar um veículo contemporâneo de ponta, qual subsistema mais se destaca aos seus olhos?",
+        opcoes: [
+            { texto: "A central ECU, redes CAN/LIN embarcadas e gerenciamento elétrico da injeção.", curso: "automotiva" },
+            { texto: "O sistema operacional multimídia, processamento de dados de telemetria e segurança cloud.", curso: "ti" },
+            { texto: "A rigidez torcional do chassi, eixos de transmissão de torque e tolerância de bielas.", curso: "mecanica" },
+            { texto: "O arranjo do sistema elétrico de tração híbrida e conversores regenerativos.", curso: "eletrica" }
         ]
     },
     {
-        id: 7,
-        text: "Qual tipo de desafio prático te traz maior satisfação ao ser concluído?",
-        alternatives: [
-            { text: "Ver um código rodar sem falhas ou uma rede de computadores perfeitamente segura.", weights: { "Tecnologia da Informação e Informática": 4 } },
-            { text: "Consertar a climatização de um local ou o motor complexo de um carro de última geração.", weights: { "Refrigeração e Climatização": 4, "Automotiva": 4 } },
-            { text: "Concluir uma peça física estruturada, soldada, esculpida ou costurada com suas mãos.", weights: { "Metalurgia e Soldagem": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4, "Construção Civil e Design de Mobiliário": 3 } },
-            { text: "Reduzir custos e otimizar o tempo de entrega de mercadorias em uma operação complexa.", weights: { "Logística e Transporte": 4, "Administração e Gestão": 4 } }
+        pergunta: "Se você tivesse que se especializar em uma ferramenta profissional avançada de mercado, qual escolheria?",
+        opcoes: [
+            { texto: "IDE de codificação avançada com suporte a repositórios Git corporativos e Kubernetes.", curso: "ti" },
+            { texto: "Plataformas CAD 3D paramétricas de modelagem industrial estrutural pesada.", curso: "mecanica" },
+            { texto: "Suítes de BI empresariais estruturadas para mineração de dados orçamentários.", curso: "gestao" },
+            { texto: "Softwares integrados de simulação de circuitos elétricos industriais e rotas de painéis.", curso: "eletrica" }
         ]
     },
     {
-        id: 8,
-        text: "Ao planejar algo, qual é o seu foco principal?",
-        alternatives: [
-            { text: "A estética visual, a harmonia das cores, formas e a experiência do usuário final.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 3 } },
-            { text: "A eficiência de fluxo: menor desperdício de espaço, energia e recursos.", weights: { "Logística e Transporte": 4, "Meio Ambiente, Saúde e Segurança do Trabalho": 3 } },
-            { text: "A arquitetura de dados e as integrações automáticas de sistemas digitais.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 3 } },
-            { text: "A viabilidade econômica e o gerenciamento estratégico de pessoas.", weights: { "Administração e Gestão": 4 } }
+        pergunta: "Diante de um vazamento severo de subprodutos ou resíduos de produção, qual tática técnica propõe?",
+        opcoes: [
+            { texto: "Aplicar reações químicas de neutralização alcalina ou ácida controlada no efluente.", curso: "quimica" },
+            { texto: "Reestruturar os contratos de descarte e mapear auditorias operacionais de conformidade.", curso: "gestao" },
+            { texto: "Instalar filtros mecânicos de alta retenção e eixos automatizados de raspagem física.", curso: "mecanica" },
+            { texto: "Instalar atuadores elétricos automáticos de corte interligados a sensores de fluxo.", curso: "eletrica" }
         ]
     },
     {
-        id: 9,
-        text: "Sua relação com trabalhos manuais e ferramentas físicas é de:",
-        alternatives: [
-            { text: "Alta afinidade. Gosto do contato com metais, madeiras, soldas e ajustes de força.", weights: { "Metalurgia e Soldagem": 4, "Construção Civil e Design de Mobiliário": 4, "Fabricação Mecânica e Mecânica Industrial": 3 } },
-            { text: "Precisão delicada. Prefiro montagem de placas eletrônicas ou instrumentação milimétrica.", weights: { "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Refrigeração e Climatização": 3 } },
-            { text: "Artesanal e criativa. Prefiro lidar com texturas, moldes, tecidos ou papéis especiais.", weights: { "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4, "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4 } },
-            { text: "Baixa afinidade física. Meu foco operacional é totalmente digital ou focado em planilhas.", weights: { "Tecnologia da Informação e Informática": 4, "Administração e Gestão": 4 } }
+        pergunta: "Em um time de Pesquisa & Desenvolvimento, qual atribuição maximiza o seu potencial técnico?",
+        opcoes: [
+            { texto: "Validar a reatividade físico-química e toxicidade controlada de novos compostos.", curso: "quimica" },
+            { texto: "Modelar e rodar algoritmos preditivos baseados em redes neurais de Machine Learning.", curso: "ti" },
+            { texto: "Executar testes destrutivos de tração mecânica, dureza e análise de fadiga mecânica.", curso: "mecanica" },
+            { texto: "Conduzir calibrações dinâmicas de sensores de oxigênio em bancadas automotivas.", curso: "automotiva" }
         ]
     },
     {
-        id: 10,
-        text: "Diante de um conflito de opiniões na sua equipe, como você reage?",
-        alternatives: [
-            { text: "Escuto todos com empatia e busco uma negociação harmoniosa focada no bem-estar mútuo.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4, "Administração e Gestão": 3 } },
-            { text: "Uso dados concretos, relatórios e métricas frias para definir objetivamente a melhor opção.", weights: { "Administração e Gestão": 4, "Química, Cerâmica e Plásticos": 3 } },
-            { text: "Tento propor uma alternativa técnica inovadora que integre as melhores ideias criativas.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 3 } },
-            { text: "Foco no cumprimento das metas do projeto sem deixar a equipe perder tempo com desvios.", weights: { "Logística e Transporte": 4 } }
+        pergunta: "Qual pane técnica do cotidiano você resolve com maior velocidade e domínio?",
+        opcoes: [
+            { texto: "Corrupção de tabelas de banco de dados, falhas de conectividade de IPs e gateways.", curso: "ti" },
+            { texto: "Curto-circuito em comandos elétricos, queima de contatores e rearme de disjuntores.", curso: "eletrica" },
+            { texto: "Falhas intermitentes de ignição automotiva, medição com multímetros em sensores Bosch.", curso: "automotiva" },
+            { texto: "Inconsistências em planilhas financeiras de conciliação de fluxo de caixa e custos.", curso: "gestao" }
         ]
     },
     {
-        id: 11,
-        text: "Que tipo de avanço tecnológico mais te fascina atualmente?",
-        alternatives: [
-            { text: "Inteligência Artificial, segurança cibernética e algoritmos preditivos.", weights: { "Tecnologia da Informação e Informática": 4 } },
-            { text: "Carros elétricos, autônomos e sistemas inteligentes de injeção e transmissão.", weights: { "Automotiva": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 3 } },
-            { text: "Energias renováveis, automação predial sustentável e reciclagem avançada de materiais.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Química, Cerâmica e Plásticos": 3 } },
-            { text: "Maquinários pesados automatizados, impressoras 3D industriais e usinagem a laser.", weights: { "Fabricação Mecânica e Mecânica Industrial": 4, "Metalurgia e Soldagem": 3, "Construção Civil e Design de Mobiliário": 3 } }
+        pergunta: "Qual marco da Indústria 4.0 você deseja explorar a fundo em seus estudos acadêmicos?",
+        opcoes: [
+            { texto: "Cybersecurity corporativa avançada e criptografia simétrica de dados na nuvem.", curso: "ti" },
+            { texto: "Manufatura aditiva direta de componentes metálicos complexos via arquivos CNC.", curso: "mecanica" },
+            { texto: "Sincronização de motores de grande porte via inversores parametrizados em rede.", curso: "eletrica" },
+            { texto: "Desenvolvimento de catalisadores de síntese química de alta seletividade.", curso: "quimica" }
         ]
     },
     {
-        id: 12,
-        text: "Em termos de atenção aos detalhes, você se considera alguém que:",
-        alternatives: [
-            { text: "Não deixa passar um miligrama ou variação térmica em misturas e receitas.", weights: { "Alimentos e Bebidas": 4, "Química, Cerâmica e Plásticos": 4 } },
-            { text: "Investiga linhas de códigos ou pequenas oscilações de frequência elétrica.", weights: { "Tecnologia da Informação e Informática": 4, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4 } },
-            { text: "Foca no acabamento perfeito de costuras, dobras, pinturas ou arestas de móveis.", weights: { "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4, "Construção Civil e Design de Mobiliário": 4, "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 3 } },
-            { text: "Monitora indicadores financeiros, taxas de entrega e notas fiscais com rigor.", weights: { "Administração e Gestão": 4, "Logística e Transporte": 4 } }
+        pergunta: "Para elevar a eficiência global de uma planta, qual ponto central de intervenção você ataca?",
+        opcoes: [
+            { texto: "O redesenho dos centros de custos e eliminação de desperdícios no inventário.", curso: "gestao" },
+            { texto: "O monitoramento cromatográfico contínuo do fluxo de refino e insumos líquidos.", curso: "quimica" },
+            { texto: "O aumento da precisão geométrica e redução de tolerâncias mecânicas em robôs.", curso: "mecanica" },
+            { texto: "A minimização da latência de pacotes de dados nos servidores SCADA centrais.", curso: "ti" }
         ]
     },
     {
-        id: 13,
-        text: "Como você se comporta em relação à preservação ambiental e sustentabilidade?",
-        alternatives: [
-            { text: "É minha prioridade: procuro ativamente formas de reduzir pegada de carbono e riscos laborais.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4 } },
-            { text: "Vejo como um desafio de engenharia: criar motores e indústrias que gastem muito menos energia.", weights: { "Automotiva": 3, "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Refrigeração e Climatização": 4 } },
-            { text: "Foco no ciclo do produto: embalagens biodegradáveis, reaproveitamento de retalhos ou celulose.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 3, "Química, Cerâmica e Plásticos": 3 } },
-            { text: "Busco a otimização através da digitalização de processos para reduzir o uso de papel e transporte físico.", weights: { "Tecnologia da Informação e Informática": 3, "Administração e Gestão": 3 } }
+        pergunta: "Se uma verba corporativa fosse liberada para expandir seus recursos práticos, onde investiria?",
+        opcoes: [
+            { texto: "Osciloscópios automotivos digitais e scanners de diagnóstico via barramento.", curso: "automotiva" },
+            { texto: "Pastilhas de metal duro intercambiáveis e cabeçotes micrométricos de usinagem.", curso: "mecanica" },
+            { texto: "Analisadores de qualidade de energia e infraestrutura de aterramento elétrico.", curso: "eletrica" },
+            { texto: "Licenças corporativas de ERP em nuvem para orquestração integrada de faturamento.", curso: "gestao" }
         ]
     },
     {
-        id: 14,
-        text: "Se você estivesse em uma fábrica de alimentos ou bebidas, onde preferiria atuar?",
-        alternatives: [
-            { text: "No laboratório químico testando valores nutricionais, conservação e controle bacteriológico.", weights: { "Alimentos e Bebidas": 4, "Química, Cerâmica e Plásticos": 4 } },
-            { text: "Na automação das esteiras, sensores de peso e braços de empacotamento rápido.", weights: { "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Fabricação Mecânica e Mecânica Industrial": 3 } },
-            { text: "No planejamento logístico de distribuição rápida para que o produto chegue fresco aos mercados.", weights: { "Logística e Transporte": 4, "Administração e Gestão": 2 } },
-            { text: "No design visual e apelo gráfico das embalagens do produto.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4 } }
+        pergunta: "Qual metodologia de absorção técnica mais se adequa à sua forma de consolidação de conhecimento?",
+        opcoes: [
+            { texto: "Interagir diretamente com o objeto de teste físico, montando e desmontando sistemas.", curso: "automotiva" },
+            { texto: "Estudar rigorosamente a lógica matemática estrutural por trás da tecnologia.", curso: "ti" },
+            { texto: "Analisar as diretrizes de normas técnicas (NBRs/NRs) e diagramas de segurança.", curso: "eletrica" },
+            { texto: "Mapear a viabilidade econômica do conceito técnico aplicado ao mercado.", curso: "gestao" }
         ]
     },
     {
-        id: 15,
-        text: "Qual destas ciências ou disciplinas te desperta mais curiosidade natural?",
-        alternatives: [
-            { text: "Lógica matemática pura, programação estruturada e redes.", weights: { "Tecnologia da Informação e Informática": 4 } },
-            { text: "Física mecânica, termodinâmica e estudo de forças ou fluidos.", weights: { "Fabricação Mecânica e Mecânica Industrial": 4, "Automotiva": 3, "Refrigeração e Climatização": 4 } },
-            { text: "Química orgânica, propriedades dos materiais, polímeros e ligas metálicas.", weights: { "Química, Cerâmica e Plásticos": 4, "Metalurgia e Soldagem": 4 } },
-            { text: "Comunicação, marketing institucional e psicologia organizacional.", weights: { "Administração e Gestão": 4 } }
-        ]
-    },
-    {
-        id: 16,
-        text: "Imagine que você recebeu a missão de renovar um ambiente antigo. Qual sua abordagem?",
-        alternatives: [
-            { text: "Instalar sistemas inteligentes de iluminação automatizada e controle de temperatura.", weights: { "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Refrigeração e Climatização": 4 } },
-            { text: "Projetar novos móveis planejados sob medida com estética moderna e otimização de espaço.", weights: { "Construção Civil e Design de Mobiliário": 4 } },
-            { text: "Avaliar a estrutura das paredes, gessos, pinturas e revestimentos cerâmicos duráveis.", weights: { "Construção Civil e Design de Mobiliário": 4, "Química, Cerâmica e Plásticos": 3 } },
-            { text: "Montar toda a infraestrutura de rede Wi-Fi de alta performance e cabeamento de dados.", weights: { "Tecnologia da Informação e Informática": 4 } }
-        ]
-    },
-    {
-        id: 17,
-        text: "Na escola ou trabalho, as pessoas costumam te elogiar principalmente por qual motivo?",
-        alternatives: [
-            { text: "Sua criatividade visual, bom gosto estético ou habilidades de desenho.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4, "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": 4 } },
-            { text: "Sua facilidade de expressão, liderança confiável e boa oratória.", weights: { "Administração e Gestão": 4 } },
-            { text: "Sua extrema dedicação prática, foco manual e precisão milimétrica nas entregas físicas.", weights: { "Metalurgia e Soldagem": 4, "Fabricação Mecânica e Mecânica Industrial": 4, "Construção Civil e Design de Mobiliário": 3 } },
-            { text: "Sua capacidade analítica veloz para desatar nós e resolver problemas complexos no computador.", weights: { "Tecnologia da Informação e Informática": 4 } }
-        ]
-    },
-    {
-        id: 18,
-        text: "Se você fose estagiar em uma multinacional automotiva, em qual setor preferiria entrar?",
-        alternatives: [
-            { text: "Na linha de frente testando motores, diagnósticos eletrônicos e reparos mecânicos de ponta.", weights: { "Automotiva": 4, "Fabricação Mecânica e Mecânica Industrial": 3 } },
-            { text: "Na simulação digital tridimensional da aerodinâmica e design externo do veículo.", weights: { "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 3, "Automotiva": 3, "Tecnologia da Informação e Informática": 3 } },
-            { text: "No gerenciamento da cadeia de suprimentos global que traz as peças de fora do país.", weights: { "Logística e Transporte": 4, "Administração e Gestão": 3 } },
-            { text: "Na auditoria das condições de segurança dos operários e controle de resíduos industriais.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4 } }
-        ]
-    },
-    {
-        id: 19,
-        text: "Quando você pensa no seu futuro profissional diário, você se imagina:",
-        alternatives: [
-            { text: "Em um escritório corporativo dinâmico ou gerenciando negócios via home office.", weights: { "Administração e Gestão": 4 } },
-            { text: "Em movimento pelas oficinas, indústrias, galpões logísticos ou prestando serviços externos de campo.", weights: { "Automotiva": 3, "Logística e Transporte": 3, "Refrigeração e Climatização": 4, "Metalurgia e Soldagem": 3 } },
-            { text: "Trabalhando focado em computadores de alta potência, criando códigos, telas digitais ou artes.", weights: { "Tecnologia da Informação e Informática": 4, "Design Gráfico, Papel, Celulose, Gráfica e Editorial": 4 } },
-            { text: "Dentro de laboratórios estéreis, focando em pesquisas, análises microscópicas ou testes biológicos.", weights: { "Química, Cerâmica e Plásticos": 4, "Alimentos e Bebidas": 4 } }
-        ]
-    },
-    {
-        id: 20,
-        text: "Para você, qual a importância de um sistema de automação e robótica?",
-        alternatives: [
-            { text: "Substituir trabalhos perigosos de alto risco humano, gerando um ambiente laboral seguro.", weights: { "Meio Ambiente, Saúde e Segurança do Trabalho": 4 } },
-            { text: "Aumentar exponencialmente a produtividade e a velocidade de distribuição de bens de consumo.", weights: { "Logística e Transporte": 4, "Administração e Gestão": 3 } },
-            { text: "Integrar perfeitamente softwares de inteligência com hardware mecânico avançado.", weights: { "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": 4, "Tecnologia da Informação e Informática": 3 } },
-            { text: "Dar repetibilidade perfeita a cortes, soldas e moldagens de peças industriais robustas.", weights: { "Fabricação Mecânica e Mecânica Industrial": 4, "Metalurgia e Soldagem": 4 } }
+        pergunta: "Diante de um desvio severo em um indicador técnico que parou o time, qual sua postura imediata?",
+        opcoes: [
+            { texto: "Rastrear recursivamente as linhas de fluxo ou código até isolar a quebra lógica.", curso: "ti" },
+            { texto: "Medir fisicamente os componentes com instrumentos de precisão até achar a folga.", curso: "mecanica" },
+            { texto: "Reunir os líderes das frentes para reprogramar custos e o plano de contingência comercial.", curso: "gestao" },
+            { texto: "Consultar os manuais de esquemas elétricos do fabricante e diagramas lógicos de relés.", curso: "eletrica" }
         ]
     }
 ];
 
-const areaProfiles = {
-    "Administração e Gestão": {
-        description: "Seu perfil demonstra liderança natural, pensamento estratégico e facilidade para organizar pessoas e processos. Você tende a gostar de ambientes corporativos dinâmicos, planejamento de metas e tomada de decisões corporativas importantes.",
-        skills: ["Liderança de equipes", "Gestão de tempo", "Análise de métricas", "Comunicação estratégica"],
-        strengths: ["Visão de negócios", "Organização impecável", "Resolução de conflitos"],
-        style: "Corporativo, estratégico e focado em resultados de mercado.",
-        careers: ["Gestor Industrial", "Analista de Processos", "Supervisor Administrativo"],
-        motivation: "Grandes líderes não gerenciam apenas processos, eles impulsionam pessoas a construir o futuro.",
-        duration: "18 a 24 meses (Técnico)",
-        shifts: "Manhã, Tarde e Noite"
+// CENTRAL DE FAQ - BANCO DE DADOS REALISTA
+const bancoFAQ = [
+    {
+        q: "Os cursos de Aprendizagem Industrial do SENAI possuem cobrança de mensalidade?",
+        a: "Não. Os cursos vinculados ao programa de Aprendizagem Profissional Industrial promovidos pelo SENAI são totalmente gratuitos para os candidatos classificados em processo seletivo oficial."
     },
-    "Alimentos e Bebidas": {
-        description: "Seu perfil apresenta forte aptidão para o controle de qualidade, atenção cirúrgica a detalhes e interesse pelas ciências aplicadas à fabricação e conservação. Você valoriza métodos rígidos de higiene e processos químicos de transformação alimentar.",
-        skills: ["Controle microbiológico", "Análise físico-química", "Gestão de receitas em escala"],
-        strengths: ["Atenção extrema a normas", "Precisão analítica", "Foco em biossegurança"],
-        style: "Científico, rigoroso e voltado à produção industrial sustentável.",
-        careers: ["Técnico em Alimentos", "Supervisor de Qualidade", "Pesquisador de Produtos"],
-        motivation: "Alimentar o mundo com tecnologia e segurança é uma das missões mais nobres da indústria moderna.",
-        duration: "24 meses (Técnico)",
-        shifts: "Manhã e Tarde"
+    {
+        q: "Qual a diferença estrutural entre a Aprendizagem Industrial e o Curso Técnico?",
+        a: "A Aprendizagem Industrial foca na qualificação e inserção inicial de jovens no setor por meio de contratos com indústrias locais, unindo teoria laboratorial e prática de mercado. Os Cursos Técnicos exigem nível médio e entregam alta especialização tecnológica em disciplinas específicas de engenharia."
     },
-    "Automotiva": {
-        description: "Seu perfil destaca paixão por mecânica avançada, sistemas de propulsão e diagnósticos eletrônicos veiculares. Você adora entender o funcionamento interno de máquinas complexas e resolver problemas práticos de engenharia automotiva.",
-        skills: ["Diagnóstico computadorizado", "Mecânica automotiva de precisão", "Sistemas elétricos veiculares"],
-        strengths: ["Raciocínio mecânico veloz", "Destreza manual técnica", "Solução de panes eletrônicas"],
-        style: "Prático, tecnológico e focado em performance mecânica.",
-        careers: ["Técnico Automotivo", "Especialista em Motores Elétricos", "Consultor Técnico Veicular"],
-        motivation: "A mobilidade humana move o mundo, e você é a mente que mantém essa engrenagem acelerando na direção certa.",
-        duration: "24 meses (Técnico)",
-        shifts: "Tarde e Noite"
+    {
+        q: "É possível obter contratação efetiva corporativa durante o andamento do curso?",
+        a: "Sim. O ecossistema industrial utiliza ativamente as turmas do SENAI como fonte principal de retenção de talentos, iniciando contratos formais de jovem aprendiz logo no início das atividades acadêmicas."
     },
-    "Construção Civil e Design de Mobiliário": {
-        description: "Seu perfil combina pensamento espacial, atenção a estruturas físicas e sensibilidade estética de design. Você gosta de ver projetos saírem do papel e tomarem formas sólidas, aliando funcionalidade, beleza e ergonomia de ambientes.",
-        skills: ["Leitura de plantas e projetos", "Prototipagem de móveis", "Cálculo estrutural básico"],
-        strengths: ["Visão espacial avançada", "Criatividade prática", "Foco no acabamento estético"],
-        style: "Criativo, estrutural e voltado à execução de obras ou peças físicas duráveis.",
-        careers: ["Projetista de Mobiliário", "Técnico em Edificações", "Designer de Interiores Industriais"],
-        motivation: "Construir e moldar o espaço onde as pessoas vivem é transformar conceitos abstratos em realidade palpável.",
-        duration: "18 a 24 meses (Técnico)",
-        shifts: "Manhã e Noite"
-    },
-    "Design de Moda, Têxtil, Vestuário, Calçados e Joalheria": {
-        description: "Você demonstra alta sensibilidade artística, vision estética refinada e forte conexão com a economia criativa. Seu perfil une a habilidade manual do corte e montagem com a inovação conceitual das tendências visuais industriais.",
-        skills: ["Desenho de coleções", "Modelagem e prototipagem", "Estudo de materiais e texturas"],
-        strengths: ["Criatividade disruptiva", "Senso de estética avançado", "Atenção a microdetalhes"],
-        style: "Artístico, inovador e conectado às tendências globais de consumo.",
-        careers: ["Designer de Produto/Moda", "Modelista Industrial", "Estilista Tecnológico"],
-        motivation: "Vestir a sociedade com arte, ergonomia e sustentabilidade é ditar o ritmo cultural do futuro.",
-        duration: "18 meses (Técnico)",
-        shifts: "Tarde e Noite"
-    },
-    "Design Gráfico, Papel, Celulose, Gráfica e Editorial": {
-        description: "Seu perfil indica forte apelo visual, criatividade voltada à comunicação de marcas e facilidade para criar embalagens e layouts inovadores. Você gosta da junção entre a arte vetorial digital e a engenharia de impressão industrial.",
-        skills: ["Editoração visual digital", "Planejamento de embalagens", "Fechamento de arquivos industriais"],
-        strengths: ["Pensamento altamente criativo", "Comunicação visual precisa", "Inovação editorial"],
-        style: "Visual, conceitual e focado na experiência de comunicação do usuário.",
-        careers: ["Designer Gráfico Industrial", "Técnico em Produção Gráfica", "Projetista de Embalagens"],
-        motivation: "A imagem conecta ideias instantaneamente. Seu talento dá forma visual às maiores inovações do mercado.",
-        duration: "18 meses (Técnico)",
-        shifts: "Manhã e Tarde"
-    },
-    "Fabricação Mecânica e Mecânica Industrial": {
-        description: "Seu perfil possui inclinação clara para a engenharia de precisão, usinagem, manuseio de ferramentas pesadas e funcionamento de plantas industriais. Você gosta de geometrias exatas, encaixes perfeitos e manutenção preventiva de motores robustos.",
-        skills: ["Operação de tornos/CNC", "Metrologia industrial", "Manutenção mecânica preditiva"],
-        strengths: ["Raciocínio lógico-espacial", "Resistência sob pressão", "Precisão milimétrica"],
-        style: "Técnico, operacional pesado e altamente focado na precisão de fábrica.",
-        careers: ["Técnico em Mecânica Industrial", "Programador de CNC", "Projetista Mecânico"],
-        motivation: "As máquinas pesadas constroem a base de qualquer país, e você detém o controle dessa força motriz.",
-        duration: "24 meses (Técnico)",
-        shifts: "Manhã, Tarde e Noite"
-    },
-    "Logística e Transporte": {
-        description: "Seu perfil demonstra foco em eficiência de fluxos, organização de redes de distribuição e paixão por otimização de tempo e espaço. Você é movido por estratégias inteligentes que garantem que insumos cruciais cheguem a seus destinos sem falhas.",
-        skills: ["Gestão de cadeias de suprimentos", "Planejamento de rotas", "Controle inteligente de estoque"],
-        strengths: ["Pensamento tático veloz", "Organização sistêmica", "Minimização de gargalos"],
-        style: "Dinâmico, analítico e totalmente focado em prazos e inteligência de distribuição.",
-        careers: ["Analista de Logística", "Supervisor de Supply Chain", "Coordenador de Frotas"],
-        motivation: "A logística é as artérias da economia mundial. Conectar pontos distantes com eficiência cirúrgica é sua grande perícia.",
-        duration: "18 meses (Técnico)",
-        shifts: "Manhã e Noite"
-    },
-    "Mecatrônica, Sistemas de Automação, Energia e Eletrônica": {
-        description: "Seu perfil representa a perfeita união entre hardware e software. Você adora robótica, programação de microcontroladores, circuitos elétricos e automação residencial ou industrial, arquitetando sistemas integrados e inteligentes.",
-        skills: ["Programação de CLPs", "Montagem de circuitos eletrônicos", "Integração de sistemas robóticos"],
-        strengths: ["Lógica abstrata aplicada", "Visão sistêmica multidisciplinar", "Inovação tecnológica"],
-        style: "Altamente tecnológico, analítico e voltado ao futuro da automação.",
-        careers: ["Técnico em Mecatrônica", "Programador de Robótica Industrial", "Técnico em Eletrônica/Automação"],
-        motivation: "Dar inteligência às máquinas e automatizar o esforço humano é liderar a transformação da Indústria 4.0.",
-        duration: "24 meses (Técnico)",
-        shifts: "Manhã, Tarde e Noite"
-    },
-    "Meio Ambiente, Saúde e Segurança do Trabalho": {
-        description: "Você apresenta um forte perfil voltado à proteção, conformidade com leis, sustentabilidade ecológica e segurança humana. Sua atenção é direcionada à mitigação de riscos laborais e preservação inteligente da natureza nos processos industriais.",
-        skills: ["Mapeamento de riscos laborais", "Auditoria ambiental", "Aplicação de normas técnicas (NRs)"],
-        strengths: ["Alto senso de responsabilidade", "Empatia socioemocional", "Atenção crítica a perigos"],
-        style: "Humano, fiscalizador, preventivo e essencialmente sustentável.",
-        careers: ["Técnico em Segurança do Trabalho", "Auditor Ambiental Industrial", "Consultor de Normas Regulamentadoras"],
-        motivation: "Nenhum progresso industrial é válido se não proteger a vida humana e o planeta que habitamos. Você é essa voz consciente.",
-        duration: "18 a 24 meses (Técnico)",
-        shifts: "Tarde e Noite"
-    },
-    "Metalurgia e Soldagem": {
-        description: "Seu perfil demonstra paixão pela transformação pesada de ligas metálicas, processos de fusão e união de estruturas através de soldagens especiais. Você tem inclinação para desafios de alta resistência física e detalhamento de estruturas metálicas complexas.",
-        skills: ["Soldagem industrial (MIG/TIG)", "Ensaios destrutivos e não-destrutivos", "Metalografia aplicada"],
-        strengths: ["Foco manual absoluto", "Conhecimento técnico de materiais", "Resistência técnica controlada"],
-        style: "Prático, focado em materiais pesados e resistente a ambientes industriais exigentes.",
-        careers: ["Inspetor de Soldagem", "Técnico em Metalurgia", "Especialista em Caldeiraria Industrial"],
-        motivation: "Unir metais e moldar estruturas colossais sob condições extremas exige a destreza exata que você possui.",
-        duration: "18 meses (Técnico)",
-        shifts: "Noite"
-    },
-    "Química, Cerâmica e Plásticos": {
-        description: "Seu perfil indica mente analítica, voltada para laboratórios, reações químicas moleculares e o desenvolvimento de novos polímeros ou revestimentos. Você gosta de entender a composição microscópica das coisas e suas aplicações práticas.",
-        skills: ["Análise química laboratorial", "Formulações industriais", "Operação de reatores e polímeros"],
-        strengths: ["Curiosidade científica de base", "Atenção a protocols de risco", "Foco em pesquisa de materiais"],
-        style: "Científico, metodológico e fortemente focado em laboratórios industriais.",
-        careers: ["Técnico em Química Industrial", "Analista de Polímeros e Plásticos", "Controlador de Processos Químicos"],
-        motivation: "Mudar a estrutura da matéria para criar novos produtos é desvendar os segredos químicos que geram o futuro.",
-        duration: "24 meses (Técnico)",
-        shifts: "Manhã e Noite"
-    },
-    "Refrigeração e Climatização": {
-        description: "Seu perfil demonstra grande aptidão para trabalhar com sistemas térmicos, controle de fluidos refrigerantes e termodinâmica. Você foca no equilíbrio térmico essencial para conservação de medicamentos, alimentos e conforto de grandes data centers.",
-        skills: ["Instalação de chillers e VRFs", "Manutenção de compressores térmicos", "Cálculo de carga térmica"],
-        strengths: ["Raciocínio diagnóstico prático", "Autonomia em serviços técnicos", "Domínio de fluidos e pressões"],
-        style: "Técnico de campo, resolutivo e focado em engenharia térmica aplicada.",
-        careers: ["Técnico em Climatização Industrial", "Projetista de Refrigeração Comercial", "Mecânico de Sistemas Térmicos"],
-        motivation: "O controle térmico exato garante a viabilidade das maiores tecnologias e alimentos do planeta. Você domina esse equilíbrio.",
-        duration: "18 meses (Técnico)",
-        shifts: "Tarde e Noite"
-    },
-    "Tecnologia da Informação e Informática": {
-        description: "Seu perfil demonstra fortíssima capacidade lógica, curiosidade tecnológica abstrata e agilidade para resolver problemas complexos por meio de computadores. Você tende a gostar de algoritmos, desenvolvimento de software, infraestruturas de redes e segurança digital.",
-        skills: ["Lógica de programação estruturada", "Administração de redes e servidores", "Cibersegurança de dados"],
-        strengths: ["Raciocínio abstrato hiperveloz", "Autodidatismo tecnológico", "Foco mental contínuo"],
-        style: "Digital, inovador, altamente conectado e voltado ao ecossistema de software.",
-        careers: ["Desenvolvedor de Software", "Analista de Redes e Infraestrutura", "Especialista em Segurança Cibernética"],
-        motivation: "As linhas de código que você escreve hoje criam os sistemas virtuais inteligentes que governarão o mundo amanhã.",
-        duration: "18 a 24 meses (Técnico)",
-        shifts: "Manhã, Tarde e Noite"
+    {
+        q: "Os diplomas emitidos pelo SENAI possuem validade e reconhecimento nacional?",
+        a: "Sim. A certificação do SENAI tem validade jurídica integral em todo o território nacional e é considerada a principal chancela de qualidade operacional pelas maiores multinacionais e indústrias de base instaladas no país."
     }
-};
+];
 
-let currentQuestionIndex = 0;
-let scores = {};
+// VARIÁVEIS GLOBAIS DE ESTADO DO DIAGNÓSTICO
+let ponteiroQuestao = 0;
+let scoreVocacional = { ti: 0, mecanica: 0, automotiva: 0, gestao: 0, eletrica: 0, quimica: 0 };
+let alternativaSelecionada = null;
 
-function initScores() {
-    for (const area in areaProfiles) {
-        scores[area] = 0;
-    }
+// GATILHO INICIAL DO APP
+document.addEventListener("DOMContentLoaded", () => {
+    gerarPreviewLateralCursos();
+    gerarListaGeralPortfolioCursos();
+    gerarFAQCentralInformativo();
+    renderizarQuestaoAtivaQuiz(0);
+});
+
+// MOTOR DE ALTERNAÇÃO DE ABAS DA SIDEBAR (INTERATIVIDADE DOS BOTÕES LATERAIS)
+function alternarTela(idAbatarget) {
+    // Atualiza o estado visual ativo no menu esquerdo
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    const itemMenu = document.getElementById(`nav-${idAbatarget}`);
+    if (itemMenu) itemMenu.classList.add('active');
+
+    // Oculta todas as seções centrais de conteúdo
+    document.querySelectorAll('.content-section').forEach(secao => secao.classList.add('hidden'));
+
+    // Exibe apenas a seção selecionada pelo clique do usuário
+    const secaoAlvo = document.getElementById(`section-${idAbatarget}`);
+    if (secaoAlvo) secaoAlvo.classList.remove('hidden');
 }
 
-const startScreen = document.getElementById('start-screen');
-const quizScreen = document.getElementById('quiz-screen');
-const resultScreen = document.getElementById('result-screen');
-const btnStart = document.getElementById('btn-start');
-const btnRestart = document.getElementById('btn-restart');
+// CONSTRUTOR DINÂMICO DOS CARDS COMPACTOS (SIDEBAR DIREITA)
+function gerarPreviewLateralCursos() {
+    const wrapper = document.getElementById("courses-container");
+    if (!wrapper) return;
+    wrapper.innerHTML = "";
 
-const progressBar = document.getElementById('progress-bar');
-const currentStageText = document.getElementById('current-stage');
-const currentQuestionNumText = document.getElementById('current-question-num');
-const questionText = document.getElementById('question-text');
-const alternativesContainer = document.getElementById('alternatives-container');
-const questionContainer = document.getElementById('question-container');
-
-btnStart.addEventListener('click', startQuiz);
-btnRestart.addEventListener('click', restartQuiz);
-
-function startQuiz() {
-    initScores();
-    currentQuestionIndex = 0;
-    startScreen.classList.add('hidden');
-    resultScreen.classList.add('hidden');
-    quizScreen.classList.remove('hidden');
-    renderQuestion();
-}
-
-function renderQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    const stage = Math.floor(currentQuestionIndex / 4) + 1;
-    currentStageText.textContent = stage;
-    currentQuestionNumText.textContent = currentQuestionIndex + 1;
-    
-    const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
-    progressBar.style.width = `${progressPercent}%`;
-
-    questionContainer.classList.remove('fade-in');
-    void questionContainer.offsetWidth; 
-    questionContainer.classList.add('fade-in');
-
-    questionText.textContent = currentQuestion.text;
-    alternativesContainer.innerHTML = '';
-    const letters = ['A', 'B', 'C', 'D'];
-
-    currentQuestion.alternatives.forEach((alt, idx) => {
-        const button = document.createElement('button');
-        button.className = 'option-btn';
-        button.onclick = () => selectAlternative(alt.weights);
-        button.innerHTML = `
-            <span class="option-letter">${letters[idx]})</span>
-            <span class="option-content">${alt.text}</span>
+    Object.keys(listaCursos).forEach(key => {
+        const c = listaCursos[key];
+        const cardHtml = `
+            <div class="course-card-small">
+                <div class="course-card-header">
+                    <i class="fa-solid ${c.icone}"></i>
+                    <h3 class="course-card-title">${c.nome}</h3>
+                </div>
+                <p class="course-card-desc">${c.descricao.substring(0, 115)}...</p>
+                <div class="course-card-meta">
+                    <span><i class="fa-solid fa-microchip"></i> Core Industrial</span>
+                    <span><i class="fa-solid fa-clock"></i> ${c.cargaHoraria}</span>
+                </div>
+            </div>
         `;
-        alternativesContainer.appendChild(button);
+        wrapper.insertAdjacentHTML("beforeend", cardHtml);
     });
 }
 
-function selectAlternative(weights) {
-    for (const area in weights) {
-        if (scores.hasOwnProperty(area)) {
-            scores[area] += weights[area];
-        }
-    }
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        renderQuestion();
-    } else {
-        progressBar.style.width = '100%';
-        setTimeout(showResults, 400); 
-    }
-}
+// CONSTRUTOR EXTENSO DO PORTFÓLIO DE CURSOS (ABA 'SOBRE OS CURSOS')
+function gerarListaGeralPortfolioCursos() {
+    const containerGeral = document.getElementById("lista-geral-cursos");
+    if (!containerGeral) return;
+    containerGeral.innerHTML = "";
 
-function showResults() {
-    quizScreen.classList.add('hidden');
-    resultScreen.classList.remove('hidden');
-    resultScreen.classList.add('fade-in');
-
-    let winnerArea = "";
-    let maxScore = -1;
-
-    for (const area in scores) {
-        if (scores[area] > maxScore) {
-            maxScore = scores[area];
-            winnerArea = area;
-        }
-    }
-
-    let sortedAreas = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-    const profile = areaProfiles[winnerArea];
-
-    document.getElementById('result-title').textContent = winnerArea;
-    document.getElementById('result-description').textContent = profile.description;
-    document.getElementById('text-style').textContent = profile.style;
-    document.getElementById('motivational-message').textContent = `"${profile.motivation}"`;
-
-    // INJETA OS DADOS DA OPÇÃO 3 (Duração e Turno)
-    document.getElementById('course-duration').textContent = profile.duration;
-    document.getElementById('course-shifts').textContent = profile.shifts;
-
-    fillList('list-skills', profile.skills);
-    fillList('list-strengths', profile.strengths);
-    fillList('list-careers', profile.careers);
-
-    // GRÁFICO DE AFINIDADE (OPÇÃO 2)
-    const barsContainer = document.getElementById('affinity-bars-container');
-    barsContainer.innerHTML = ''; 
-    const top3Areas = sortedAreas.slice(0, 3);
-    const totalTop3Points = scores[top3Areas[0]] + scores[top3Areas[1]] + scores[top3Areas[2]];
-
-    top3Areas.forEach((area, index) => {
-        let percentage = 0;
-        if (totalTop3Points > 0) {
-            percentage = Math.round((scores[area] / totalTop3Points) * 100);
-        }
+    Object.keys(listaCursos).forEach(key => {
+        const c = listaCursos[key];
         
-        if (index === 0) percentage = Math.max(percentage, 85);
-        if (index === 1) percentage = Math.min(percentage, 75);
-        if (index === 2) percentage = Math.min(percentage, 55);
+        let tagsHabilidades = c.habilidades.map(h => `<span class="tag-item tag-item-highlight">${h}</span>`).join("");
+        let tagsMAtriz = c.grade.map(m => `<span class="tag-item">${m}</span>`).join("");
+        let tagsTechs = c.techs.map(t => `<span class="tag-item" style="border-color: rgba(255,255,255,0.15);">${t}</span>`).join("");
 
-        const row = document.createElement('div');
-        row.className = 'affinity-row';
-        row.innerHTML = `
-            <div class="affinity-labels">
-                <span class="area-name-label">${index + 1}. ${area}</span>
-                <span class="area-percentage-label">${percentage}% Match</span>
-            </div>
-            <div class="affinity-bar-bg">
-                <div class="affinity-bar-fill" id="bar-fill-${index}"></div>
+        const blocoHtml = `
+            <div class="result-box glow-border-box" style="margin-bottom: 15px;">
+                <h3 style="font-size: 1.3rem; letter-spacing: 0.5px;"><i class="fa-solid ${c.icone}"></i> Formação Técnica em ${c.nome} — ${c.cargaHoraria}</h3>
+                <p style="margin-bottom: 18px; color: #fff; font-size:1.05rem; line-height:1.5;">${c.descricao}</p>
+                
+                <div style="margin-bottom: 14px;">
+                    <strong style="font-size: 0.85rem; color: var(--neon-red); display:block; margin-bottom: 6px; font-family: var(--font-cyber); letter-spacing:1px;">MATRIZ DE CAPACITAÇÃO (HARD SKILLS):</strong>
+                    <div class="tag-list">${tagsHabilidades}</div>
+                </div>
+                
+                <div style="margin-bottom: 14px;">
+                    <strong style="font-size: 0.85rem; color: #fff; display:block; margin-bottom: 6px; font-family: var(--font-cyber); letter-spacing:1px;">UNIDADES CURRICULARES:</strong>
+                    <div class="tag-list">${tagsMAtriz}</div>
+                </div>
+
+                <div>
+                    <strong style="font-size: 0.85rem; color: var(--text-muted); display:block; margin-bottom: 6px; font-family: var(--font-cyber); letter-spacing:1px;">SUÍTES DE SOFTWARE & EQUIPAMENTOS CORE:</strong>
+                    <div class="tag-list">${tagsTechs}</div>
+                </div>
             </div>
         `;
-        barsContainer.appendChild(row);
-
-        setTimeout(() => {
-            const fillElement = document.getElementById(`bar-fill-${index}`);
-            if (fillElement) fillElement.style.width = `${percentage}%`;
-        }, 100 + (index * 150)); 
-    });
-
-    // OPERAÇÃO DO QR CODE AUTOMÁTICO
-    document.getElementById('qrcode-box').innerHTML = ""; 
-    new QRCode(document.getElementById("qrcode-box"), {
-        text: "https://www.sp.senai.br", 
-        width: 110,
-        height: 110,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+        containerGeral.insertAdjacentHTML("beforeend", blocoHtml);
     });
 }
 
-function fillList(elementId, itemsArray) {
-    const listElement = document.getElementById(elementId);
-    listElement.innerHTML = '';
-    itemsArray.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        listElement.appendChild(li);
+// CONSTRUTOR DA INTERFACE DO FAQ
+function gerarFAQCentralInformativo() {
+    const faqContainer = document.getElementById("faq-dinamico-container");
+    if (!faqContainer) return;
+    faqContainer.innerHTML = "";
+
+    bancoFAQ.forEach(item => {
+        const itemHtml = `
+            <div class="faq-item-box">
+                <h3 class="faq-question"><i class="fa-solid fa-circle-question"></i> ${item.q}</h3>
+                <p class="faq-answer">${item.a}</p>
+            </div>
+        `;
+        faqContainer.insertAdjacentHTML("beforeend", itemHtml);
     });
 }
 
-function restartQuiz() {
-    resultScreen.classList.add('hidden');
-    startScreen.classList.remove('hidden');
-    startScreen.classList.add('fade-in');
+// RENDERIZADOR DO FLUXO DO QUIZ
+function renderizarQuestaoAtivaQuiz(indice) {
+    alternativaSelecionada = null;
+    const total = perguntasQuiz.length;
+
+    document.getElementById("current-stage").innerText = `ETAPA ${indice + 1}/${total}`;
+    document.getElementById("q-counter").innerText = `Questão ${indice + 1} de ${total}`;
+    
+    const percentualProgresso = ((indice + 1) / total) * 100;
+    document.getElementById("progress-indicator").style.width = `${percentualProgresso}%`;
+
+    const dadosQ = perguntasQuiz[indice];
+    document.getElementById("q-text").innerText = dadosQ.pergunta;
+
+    const boxOpcoes = document.getElementById("options-box");
+    boxOpcoes.innerHTML = "";
+
+    const letrasPrefix = ["A", "B", "C", "D"];
+    dadosQ.opcoes.forEach((opcao, idx) => {
+        const itemHtml = `
+            <div class="option-item" id="opt-node-${idx}" onclick="capturarSelecaoOpcao(${idx}, '${opcao.curso}')">
+                <div class="option-prefix">${letrasPrefix[idx]}</div>
+                <div class="option-title">${opcao.texto}</div>
+            </div>
+        `;
+        boxOpcoes.insertAdjacentHTML("beforeend", itemHtml);
+    });
+
+    document.getElementById("btn-prev-question").disabled = indice === 0;
+
+    const btnAvancar = document.getElementById("btn-next-question");
+    if (indice === total - 1) {
+        btnAvancar.innerHTML = `Finalizar Diagnóstico <i class="fa-solid fa-flag-checkered"></i>`;
+        btnAvancar.onclick = calcularEExibirResultadoFinal;
+    } else {
+        btnAvancar.innerHTML = `Próxima <i class="fa-solid fa-arrow-right"></i>`;
+        btnAvancar.onclick = moverParaProximaPergunta;
+    }
+}
+
+// CAPTURA E MARCAÇÃO DE OPÇÃO SELECIONADA
+function capturarSelecaoOpcao(indexNode, cursoChave) {
+    document.querySelectorAll(".option-item").forEach(el => el.classList.remove("selected"));
+    const elementoAlvo = document.getElementById(`opt-node-${indexNode}`);
+    if (elementoAlvo) elementoAlvo.classList.add("selected");
+    alternativaSelecionada = cursoChave;
+}
+
+// AVANÇAR PERGUNTA
+function moverParaProximaPergunta() {
+    if (!alternativaSelecionada) {
+        alert("Aviso Operacional: Selecione uma diretriz de resposta antes de avançar na matriz.");
+        return;
+    }
+    scoreVocacional[alternativaSelecionada]++;
+    ponteiroQuestao++;
+    renderizarQuestaoAtivaQuiz(ponteiroQuestao);
+}
+
+// VOLTAR PERGUNTA
+document.getElementById("btn-prev-question").addEventListener("click", () => {
+    if (ponteiroQuestao > 0) {
+        ponteiroQuestao--;
+        renderizarQuestaoAtivaQuiz(ponteiroQuestao);
+    }
+});
+
+// MOTOR FINAL DO DIAGNÓSTICO E MAPEAMENTO
+function calcularEExibirResultadoFinal() {
+    if (!alternativaSelecionada) {
+        alert("Aviso Operacional: Selecione sua abordagem técnica final para gerar o laudo de afinidade.");
+        return;
+    }
+    scoreVocacional[alternativaSelecionada]++;
+
+    let vencedorChave = "ti";
+    let pontuacaoTop = -1;
+
+    Object.keys(scoreVocacional).forEach(key => {
+        if (scoreVocacional[key] > pontuacaoTop) {
+            pontuacaoTop = scoreVocacional[key];
+            vencedorChave = key;
+        }
+    });
+
+    const cursoGanhador = listaCursos[vencedorChave];
+
+    // Alimentação estruturada dos elementos de resultado da interface principal
+    document.getElementById("res-curso-nome").innerText = cursoGanhador.nome;
+    document.getElementById("res-perfil-desc").innerText = cursoGanhador.descricao;
+    document.getElementById("res-salario").innerText = `Estimativa de Piso Industrial: ${cursoGanhador.salario}`;
+    document.getElementById("res-motivado").innerText = `"${cursoGanhador.diretriz}"`;
+
+    // Geração dinâmica das coleções de tags customizadas no painel de laudo final
+    gerarTagsResultadoFinal("res-habilidades", cursoGanhador.habilidades, true);
+    gerarTagsResultadoFinal("res-grade", cursoGanhador.grade, false);
+    gerarTagsResultadoFinal("res-techs", cursoGanhador.techs, false);
+    gerarTagsResultadoFinal("res-atuacao", cursoGanhador.atuacao, false);
+
+    // Oculta blocos estruturais do quiz e expõe tela de diagnóstico avançada
+    document.getElementById("quiz-screen").classList.add("hidden");
+    document.getElementById("result-screen").classList.remove("hidden");
+}
+
+// INJETOR DE TAGS AUXILIAR
+function gerarTagsResultadoFinal(idAlvo, listaDados, destacar) {
+    const caixa = document.getElementById(idAlvo);
+    if (!caixa) return;
+    caixa.innerHTML = "";
+
+    listaDados.forEach(dado => {
+        const estiloClasse = destacar ? "tag-item tag-item-highlight" : "tag-item";
+        caixa.insertAdjacentHTML("beforeend", `<span class="${estiloClasse}">${dado}</span>`);
+    });
 }

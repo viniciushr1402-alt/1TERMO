@@ -55,12 +55,12 @@ def resumo():
     em_dia = 0
 
     for i in range(total):
-        treino = input("Treinamento em dia? (S/N): ").upper()
+        treino = input("Treinamento em dia: ")
 
         if treino == "S":
             em_dia += 1
 
-    print("\nResumo")
+    print("Resumo")
     print("Total de funcionários:", total)
     print("Treinamentos em dia:", em_dia)
 
